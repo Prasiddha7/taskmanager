@@ -1,32 +1,21 @@
-def apply_styles(window):
-    window.setStyleSheet("""
-        QMainWindow {
-            background-color: #f5f5f5;
-        }
+def apply_styles(widget):
+    widget.setStyleSheet("""
         QLabel {
             font-size: 16px;
             font-weight: bold;
-            color: #333;
-            margin-block:auto;
-        }
-        QLineEdit, QComboBox, QDateEdit {
-            padding: 5px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
+            color: #333333;
         }
         QPushButton {
-            padding: 10px;
-            background-color: #4caf50;
+            background-color: #007BFF;
             color: white;
-            border: none;
+            border: 1px solid #0056b3;
             border-radius: 5px;
+            padding: 5px 10px;
         }
         QPushButton:hover {
-            background-color: #45a049;
+            background-color: #0056b3;
         }
         QTreeWidget {
             border: 1px solid #ccc;
-            background-color: #fff;
         }
-                        
     """)
