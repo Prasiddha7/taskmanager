@@ -1,0 +1,48 @@
+name: Cross-Platform Build
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-mac:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.9
+      - name: Install Dependencies
+        run: |
+          pip install pyinstaller
+      - name: Build macOS App
+        run: |
+          pyinstaller --onefile --windowed --name TaskManager ui.py
+      - name: Upload macOS Build
+        uses: actions/upload-artifact@v3
+        with:
+          name: macOS-Build
+          path: dist/TaskManager.app
+
+  build-windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.9
+      - name: Install Dependencies
+        run: |
+          pip install pyinstaller
+      - name: Build Windows EXE
+        run: |
+          pyinstaller --onefile --windowed --name TaskManager ui.py
+      - name: Upload Windows Build
+        uses: actions/upload-artifact@v3
+        with:
+          name: windows-build
+          path: dist/TaskManager.exe
+
