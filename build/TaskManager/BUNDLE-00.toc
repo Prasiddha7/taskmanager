@@ -1,0 +1,3 @@
+([('TaskManager',
+   '/Users/prasiddhasubedi/Downloads/project/taskmanager/dist/TaskManager',
+   'EXECUTABLE')],)

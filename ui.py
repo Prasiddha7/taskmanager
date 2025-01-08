@@ -15,13 +15,14 @@ from PyQt5.QtWidgets import (
     QStackedWidget,
     QFormLayout,
     QSpacerItem,  # Import QSpacerItem
-    QSizePolicy 
+    QSizePolicy ,
+    QApplication 
 )
 from PyQt5.QtGui import QFont
 from PyQt5.QtCore import Qt, QDate
 from models import TaskModel
 from styles import apply_styles
-
+import sys
 
 class TaskManager(QMainWindow):
     def __init__(self):
@@ -251,11 +252,12 @@ class TaskManager(QMainWindow):
     def add_action_buttons(self, item):
         """Add Edit and Delete buttons for each task in the tree."""
         edit_button = QPushButton("Edit")
-        edit_button.setFixedSize(100, 30)  # Smaller buttons
+        edit_button.setFixedSize(100, 30) 
+        edit_button.clicked.connect(lambda: self.edit_task(item))
         delete_button = QPushButton("Delete")
-        delete_button.setFixedSize(100, 30)  # Smaller buttons
-
+        delete_button.setFixedSize(100, 30) 
         delete_button.setStyleSheet("background-color: #FF0000; color: white; border: none; border-radius: 5px;")
+        delete_button.clicked.connect(lambda: self.delete_task(item))
 
         button_container = QWidget()
         button_layout = QHBoxLayout()
@@ -288,3 +290,10 @@ class TaskManager(QMainWindow):
                 self.populate_tree()
             except ValueError as e:
                 QMessageBox.warning(self, "Update Error", str(e))
+
+# main function to run my assignment/application
+if __name__ == "__main__":
+    app = QApplication(sys.argv)
+    window = TaskManager()
+    window.show()
+    sys.exit(app.exec_())
